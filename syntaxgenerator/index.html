@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+
+<!-- Gemaakt met Tommy's bloed zweet en tranen-->
+
+<html>
+	<head>
+    	<title>Dutch Syntax Generator</title>
+        <link rel="stylesheet" type="text/css" href="https://tpietersetelus.github.io/dutchtools/css/style_universal.css"/> 
+        <link rel="stylesheet" type="text/css" href="style.css"/> 
+	</head>
+
+	<body>	
+		<h1>Dutch Syntax Generator</h1>
+		<div class="row">
+			<div class="column" id="leftcol">
+				<h2>Input</h2>	
+		
+				<input oninput="update_all();" type="checkbox" id="prefixcheck" name="prefixcheck" value="prefixcheck">
+				<label id="prefixlabel" for="prefix">Append to beginning</label><br/>
+				<textarea oninput="update_all();" class="textinput" id="prefix" name="prefix" rows="3" placeholder = "Add phrase"></textarea><br/>
+
+				<input oninput="update_all();" type="checkbox" id="phrasecheck" name="phrasecheck" value="phrasecheck" checked>
+				<label id="phraselabel" for="phrase">Main phrase</label><br/>
+				<textarea oninput="update_all();" class="textinput" id="phrase" name="phrase" rows="5" placeholder = "Add phrase"></textarea><br/>
+
+				<input oninput="update_all();" type="checkbox" id="suffixcheck" name="suffixcheck" value="suffixcheck">
+				<label id="suffixlabel" for="suffix">Append to ending</label><br/>
+				<textarea oninput="update_all();" class="textinput" id="suffix" name="suffix" rows="3" placeholder = "Add phrase"></textarea><br/>
+
+				<label for="verbselect">Main verb</label><br/>
+				<select oninput="update_all();" id="verbselect" name="verbselect"></select><br/>
+				
+				<span id="optionlabel" class="optionlabel">Options</span><br/>
+				<input oninput="update_all();" type="checkbox" id="addinfixcheck" name="addinfixcheck" value="addinfixcheck">
+                <span class="checkboxtext" id="addinfixtext">Add utterances with infixed ending</span>
+				
+			</div>
+			
+			
+			<div class="column" id="rightcol">
+				<div class="subcolumn" id="example">
+					<h2>Sample</h2>
+					<span class="samplelabel">Stem</span>
+					<ul>
+						<li><span id="sample_stem_full"><b>bewaar</b> ?</span></li>
+						<li><span id="sample_stem_split"><b>sla</b> ? <b>op</b></span></li>
+						<li style="display:none;" class="infixsample"><span id="sample_stem_split_infix"><b>sla</b> ? <b>op</b></span></li>
+
+					</ul>
+					
+					<span class="samplelabel">Infinitive</span>
+					<ul>
+						<li><span id="sample_inf"><b>kun je</b> ? <b>bewaren</b></span></li>
+						<li style="display:none;" class="infixsample"><span id="sample_inf_infix"><b>VOEGTOEkun je</b> ? <b>bewaren</b></span></li>
+					</ul>
+
+					<span class="samplelabel">Kunnen/willen</span>
+					<ul>
+						<li><span id="sample_kunnen_full"><b>zou je</b> ? <b>kunnen bewaren</b></span></li>
+						<li style="display:none;" class="infixsample"><span id="sample_kunnen_full_infix"><b>VOEGTOEzou je</b> ? <b>kunnen bewaren</b></span></li>
+						<li><span id="sample_kunnen_split"><b>zou je</b> ? <b>op kunnen slaan</b></span></li>
+						<li style="display:none;" class="infixsample"><span id="sample_kunnen_split_infix"><b>VOEGTOEzou je</b> ? <b>op kunnen slaan</b></span></li>
+					</ul>
+
+					<span class="samplelabel">Stem + t</span>
+					<ul>
+						<li><span id="sample_stem_t"><b>ik wil dat je</b> ? <b>bewaart</b></span></li>
+						<li style="display:none;" class="infixsample"><span id="sample_stem_t_infix"><b>VOEGTOEik wil dat je</b> ? <b>bewaart</b></span></li>
+					</ul>
+
+				</div>
+			
+			
+			
+				<h2>Output</h2>
+				<span class="outputlabel">Prefix slots</span>
+				<button onclick="copy_contents_single('slotprefix')">Copy</button><br/>
+				<span class="textoutput" id="slotprefix" name="slotprefix">  $inf_prefix: !include opt/payload/nl_NL/verbs/inf_prefix.yaml<br/>  $stem_t_prefix: !include opt/payload/nl_NL/verbs/stem_t_prefix.yaml</span><br/>
+
+				<span class="outputlabel">Main verb slots</span>
+				<button onclick="copy_contents_single('slotverb')">Copy</button>
+				<button onclick="copy_contents_double('slotprefix', 'slotverb')">Copy with prefix</button><br/>
+				<span class="textoutput" id="slotverb" name="slotverb">  $?_inf: !include opt/payload/nl_NL/verbs/?/infinitive.yaml<br/>  $?_stem: !include opt/payload/nl_NL/verbs/?/stem.yaml<br/>  $?_stem_t: !include opt/payload/nl_NL/verbs/?/stem_t.yaml</span><br/>
+				
+				<span class="outputlabel">Utterances</span>
+				<button onclick="copy_contents_single('utterances')">Copy</button></br>
+				<span class="textoutput" id="utterances" name="utterances">  ?</span><br/>
+
+
+			</div>
+		</div>
+        <script type="text/javascript" src="script.js"></script>				
+	</body>
+
+
+</html>
+
+<!-- (c) 2023 Tommy Pieterse-->
