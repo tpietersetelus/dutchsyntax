@@ -4,7 +4,6 @@ console.log("Script file loaded")
 
 // VARIABLES
 verbs_url = "https://tpietersetelus.github.io/dutchtools/data/verbs.txt";
-prefix_slot_output = ""
 
 
 // FUNCTIONS
@@ -41,7 +40,7 @@ function process_verbdata(input_text){
 function get_verbnames(input_array){
     verbname_array = [];
     for (const elem of input_array){
-        verbname_array.push(elem[0])
+        verbname_array.push(elem[0]);
     }
 
     verbname_array = verbname_array.filter(item => item); // Remove empty items
@@ -59,7 +58,7 @@ function get_verb_support(input_array){
             if(elem[1].startsWith("!")){ // Check if next line starts normally
 
             }else{ // If not normal, make unsupported
-                unsupported_verbs.push(elem[0])
+                unsupported_verbs.push(elem[0]);
             }       
         }
     }
