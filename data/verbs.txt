@@ -56,6 +56,8 @@
 !in/schakelen/schakel
 =explain
 !uit/leggen/leg
+=find
+!op/zoeken/zoek
 =forward
 !door/sturen/stuur
 !door/zenden/zend
