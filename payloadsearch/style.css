@@ -1,0 +1,41 @@
+/* Page-specific styling for Payload Search Engine */
+
+body {
+    background-color: #ffe49e;
+}
+
+
+::placeholder {
+  color: #a18337;
+  opacity: 1; /* Firefox */
+}
+
+
+::-ms-input-placeholder { /* Edge 12 -18 */
+  color: #a18337;
+}
+
+
+.optionalsample {
+    color: #A52A2A;
+}
+
+
+.textinput {
+	background-color: #ffeec4;
+}
+
+
+.textoutput {
+	background-color: #c2c2c2;
+}
+
+
+.verb_unsupported {
+    color: red;
+}
+
+
+.verb_limited {
+    color: orange;
+}

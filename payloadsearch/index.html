@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+    	<title>Payload Search Engine</title>
+        <link rel="stylesheet" type="text/css" href="../css/style_universal.css"/> 
+        <link rel="stylesheet" type="text/css" href="style.css"/> 
+	</head>
+
+	<body>	
+		<h1>Payload Search Engine</h1>
+		<div class="row">
+			<div class="column" id="leftcol">
+				<h2>Search</h2>	
+		
+				<input type="text" oninput="update_everything();" class="textinput" id="prefix" name="prefix" rows="3" placeholder = "Add phrase"></textarea><br/>
+				<span id="optionlabel" class="optionlabel">Language</span><br/>
+				<form id="langform">
+  					<input type="radio" id="radio_nl" name="langform" value="nl">
+  					<label for="radio_nl"><span class="checkboxtext" id="addinfixtext">nl_NL</span></label><br>
+  					<input type="radio" id="radio_en" name="langform" value="en">
+ 					<label for="radio_en"><span class="checkboxtext" id="addinfixtext">en_US</span></label><br>  
+  					<input type="radio" id="radio_all" name="langform" value="all">
+  					<label for="radio_all"><span class="checkboxtext" id="addinfixtext">all</span></label><br><br>
+				</form>
+				
+				<span id="optionlabel" class="optionlabel">Target</span><br/>
+				<form id="targetform">
+  					<input type="radio" id="radio_path" name="langform" value="path">
+  					<label for="radio_path"><span class="checkboxtext" id="addinfixtext">Path</span></label><br>
+  					<input type="radio" id="radio_text" name="langform" value="text">
+ 					<label for="radio_text"><span class="checkboxtext" id="addinfixtext">Text</span></label><br>  
+  					<input type="radio" id="radio_both" name="langform" value="both">
+  					<label for="radio_both"><span class="checkboxtext" id="addinfixtext">Both</span></label><br><br>
+				</form>
+
+				<h2>Files</h2>	
+
+			</div>
+			
+			
+			<div class="column" id="rightcol">
+				<div class="subcolumn" id="example">
+				<h2>File</h2>
+				<span class="outputlabel">Filepath</span>
+				<button onclick="copy_string(prefixslots_values)">Copy</button><br/>
+				<span class="textoutput" id="slotprefix" name="filepathtext">FILEPATH HERE</span><br/>
+
+				<span class="outputlabel">Text</span>
+				<button onclick="copy_string(verbslot_values)">Copy [dit houden of niet?]</button><br/>
+				<span class="textoutput" id="slotverb" name="filetext">Filetext</span><br/>
+
+			</div>
+		</div>
+	<script type="text/javascript" src="/script.js"></script>				
+	</body>
+
+
+</html>

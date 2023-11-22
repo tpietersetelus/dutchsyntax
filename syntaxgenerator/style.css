@@ -1,4 +1,4 @@
-/* Page-wide styling */
+/* Page-specific styling for Dutch Syntax Generator */
 
 body {
     background-color: #c2c2c2;
@@ -9,9 +9,11 @@ body {
     color: #A52A2A;
 }
 
+
 .textinput {
 	background-color: #d4d4d4;
 }
+
 
 .textoutput {
 	background-color: #c2c2c2;
@@ -21,6 +23,7 @@ body {
 .verb_unsupported {
     color: red;
 }
+
 
 .verb_limited {
     color: orange;
