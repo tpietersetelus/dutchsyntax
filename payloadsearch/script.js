@@ -27,11 +27,10 @@ function removeDuplicates(arr) {
 
 
 
-// NOTE, FUNCTION ADDS TWO SPACES IN THE BEGINNING!
 function copy_contents_single(input_id){
     var copyText = document.getElementById(input_id);
 	var textArea = document.createElement("textarea");
-	textArea.value = "  " + copyText.textContent + "\n"; // Adds an extra newline
+	textArea.value = copyText.textContent + "\n"; // Adds an extra newline
 	document.body.appendChild(textArea);
 	textArea.select();
 	document.execCommand("Copy");
