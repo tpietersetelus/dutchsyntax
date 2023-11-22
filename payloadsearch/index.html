@@ -45,12 +45,12 @@
 				<div class="subcolumn" id="example">
 				<h2>File</h2>
 				<span class="outputlabel">Filepath</span>
-				<button onclick="copy_string(prefixslots_values)">Copy</button><br/>
-				<span class="textoutput" id="slotprefix" name="filepathtext">FILEPATH HERE</span><br/>
+				<button onclick="copy_contents_single('pathoutput')">Copy</button>
+				<button onclick="copy_contents_payload('pathoutput')">Copy as slot</button><br/>
+				<span class="textoutput" id="pathoutput" name="pathoutput"><span class="output_placeholder">Select a file to view path</span></span><br/>
 
-				<span class="outputlabel">Text</span>
-				<button onclick="copy_string(verbslot_values)">Copy [dit houden of niet?]</button><br/>
-				<span class="textoutput" id="slotverb" name="filetext">Filetext</span><br/>
+				<span class="outputlabel">Text</span><br/>
+				<span class="textoutput" id="contentoutput" name="contentoutput"><span class="output_placeholder">Select a file to view payload content</span></span><br/>
 
 			</div>
 		</div>

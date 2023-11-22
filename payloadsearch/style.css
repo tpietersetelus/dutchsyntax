@@ -27,7 +27,7 @@ body {
 
 
 .textoutput {
-	background-color: #c2c2c2;
+	background-color: #ffe49e;
 }
 
 
@@ -45,6 +45,9 @@ body {
   border: none;
 }
 
+.output_placeholder {
+  color: #a18337;
+}
 
 /* Stuff to make the "last updated" text not be weird because of the margins */
 

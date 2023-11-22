@@ -81,6 +81,9 @@ textarea, .textinputline {
 	font-weight: bold;
 }
 
+.output_placeholder {
+	font-style: italic;
+}
 
 /* Clear floats after the columns */
 .row:after {

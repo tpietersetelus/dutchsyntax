@@ -20,6 +20,26 @@ function synchronousRequest(url) {
 
 
 
+function removeDuplicates(arr) {
+    return arr.filter((item,
+        index) => arr.indexOf(item) === index);
+}
+
+
+
+// NOTE, FUNCTION ADDS TWO SPACES IN THE BEGINNING!
+function copy_contents_single(input_id){
+    var copyText = document.getElementById(input_id);
+	var textArea = document.createElement("textarea");
+	textArea.value = "  " + copyText.textContent + "\n"; // Adds an extra newline
+	document.body.appendChild(textArea);
+	textArea.select();
+	document.execCommand("Copy");
+	textArea.remove();
+}
+
+
+
 function read_dropdown_value(input_id){
     var dropdown_menu = document.getElementById(input_id);
     var selected_option = dropdown_menu.value;    
@@ -56,12 +76,31 @@ function process_payload_data(input_data){
 function set_results_list(input_list, input_id){
     var ul = document.getElementById(input_id);
     ul.innerHTML = ""; // Get rid of existing stuff
+
+    i = 0;
     for (const elem of input_list){
+
+        generated_id = String.raw`result_id_${i}`
+        js_to_be_executed = String.raw`set_output_from_click('${generated_id}', processed_payload_data)`
+
+        full_html = String.raw`<a id="${generated_id}" href="#" onClick="${js_to_be_executed}">${elem}</a>`;
+
         var li = document.createElement("li");
-        li.appendChild(document.createTextNode(elem));
+        li.appendChild(document.createTextNode("PLACEHOLDER"));
+        li.innerHTML = full_html;
         ul.appendChild(li);
+
+
+        i = i+1;
     }
 }
+
+
+function read_textarea_contents(input_id){
+    content = document.getElementById(input_id).value;
+    return content;
+}
+
 
 
 function file_list_language_filter(input_dict, input_lang){
@@ -77,6 +116,46 @@ function file_list_language_filter(input_dict, input_lang){
 
 
 
+function file_list_search_filter(input_dict, input_searchterm){
+    // Get rid of case-sensitivity
+    input_searchterm = input_searchterm.toLowerCase();
+    
+    filtered_dict_path = {};
+    for (const elem of Object.keys(input_dict)){
+        elem_lower = elem.toLowerCase();
+        if (elem_lower.includes(input_searchterm)){
+            filtered_dict_path[elem] = input_dict[elem];
+        }
+    }
+    
+    
+    filtered_dict_content = {};
+    for (const elem of Object.keys(input_dict)){
+        specific_text = input_dict[elem]["content"];
+        specific_text = specific_text.toLowerCase()
+        console.log(specific_text);
+        if (specific_text.includes(input_searchterm)){
+            filtered_dict_content[elem] = input_dict[elem];
+        }
+    }
+
+    filtered_dict_both = {};
+    path_keys = Object.keys(filtered_dict_path);
+    content_keys = Object.keys(filtered_dict_content);
+    combined_keys = path_keys.concat(content_keys);
+    combined_keys = removeDuplicates(combined_keys);
+    for (const elem of combined_keys){
+        filtered_dict_both[elem] = input_dict[elem];
+    }
+
+
+
+    return {"path": filtered_dict_path, "textcontent": filtered_dict_content, "both": filtered_dict_both};
+   
+}
+
+
+
 function set_content_by_id(input_id, input_content){
     var span = document.getElementById(input_id);
     span.innerHTML = input_content;
@@ -84,17 +163,68 @@ function set_content_by_id(input_id, input_content){
 
 
 
+
+
+
+// Function to set the path and text to whatever id is passed
+function set_output_from_click(input_id, input_data_dict){
+    link_element = document.getElementById(input_id);
+    path_text = link_element.text;
+
+    selected_text = input_data_dict[path_text]["content"];
+
+    path_output_element = document.getElementById("pathoutput");
+    path_output_element.innerHTML = path_text;
+
+    content_output_element = document.getElementById("contentoutput");
+    content_output_element.innerHTML = selected_text;
+}
+
+
+
+function copy_contents_payload(input_id){
+    var copyText = document.getElementById(input_id);
+    actual_text = copyText.textContent;
+
+    path_particles = actual_text.split(String.raw`/`)
+    payload_title = path_particles[path_particles.length - 1]
+    payload_title = payload_title.replace(".yaml", "");
+    
+    
+
+    text_to_copy = String.raw`  $${payload_title}: !include ${actual_text}`
+
+
+	var textArea = document.createElement("textarea");
+	textArea.value = text_to_copy + "\n"; // Adds an extra newline
+	document.body.appendChild(textArea);
+	textArea.select();
+	document.execCommand("Copy");
+	textArea.remove();
+}
+
 // UPDATE FUNCTION
 function update_all(){
     // Get values of search/options
     language_dropdown_value = read_dropdown_value("langselect");
     target_dropdown_value = read_dropdown_value("targetselect");
+    search_bar_value = read_textarea_contents("searchinput");
+    console.log(search_bar_value);
 
     // Filtering
     payloads_filtered_by_language = file_list_language_filter(processed_payload_data, language_dropdown_value);
 
+    // If search bar empty, just skip search filtering and use the language-filtered one
+    if (search_bar_value == ""){
+        payloads_filtered_by_search = payloads_filtered_by_language;
+    }else{
+        payloads_filtered_by_search_dict = file_list_search_filter(payloads_filtered_by_language, search_bar_value);
+        payloads_filtered_by_search = payloads_filtered_by_search_dict[target_dropdown_value];
+    
+    }
+
     // TEMPORARY, IMPROVE THIS:
-    selected_file_list = Object.keys(payloads_filtered_by_language);
+    selected_file_list = Object.keys(payloads_filtered_by_search);
 
     // Add selected file names to search result list
     set_results_list(selected_file_list, "searchresults");
