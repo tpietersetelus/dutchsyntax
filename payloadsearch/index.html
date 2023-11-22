@@ -8,7 +8,8 @@
 	</head>
 
 	<body>	
-		<h1>Payload Search Engine</h1>
+		<h1 id="payloadtitle">Payload Search Engine</h1>
+		<span id="last_static" class="last">Last updated: </span><span id="last_dynamic" class="last">PLACEHOLDER</span><br/>
 		<div class="row">
 			<div class="column" id="leftcol">
 				<h2>Search</h2>	
@@ -16,13 +17,13 @@
 				<input type="text" oninput="update_all();" class="textinputline" id="searchinput" name="searchinput" placeholder = "Add keyword(s)"></input><br/>
 				
 				<span id="langlabel" class="optionlabel">Language</span><br/>
-				<select oninput="update_all();" id="verbselect" name="verbselect">
-					<option value="nl">nl_NL</option>
-					<option value="en">en_US</option>
-					<option value="general">"all"</option>
+				<select oninput="update_all();" id="langselect" name="langselect">
+					<option value="nl_NL">nl_NL</option>
+					<option value="en_US">en_US</option>
+					<option value="all">"all"</option>
 				</select><br/>		
 				<span id="targetlabel" class="optionlabel">Target</span><br/>
-				<select oninput="update_all();" id="verbselect" name="verbselect">
+				<select oninput="update_all();" id="targetselect" name="targetselect">
 					<option value="path">Path</option>
 					<option value="textcontent">Text</option>
 					<option value="both">Both</option>
@@ -30,6 +31,12 @@
 
 
 				<h2>Files</h2>	
+				
+				<ul id="searchresults">
+					<li>PLACEHOLDER</li>
+				</ul>
+				  
+				  
 
 			</div>
 			

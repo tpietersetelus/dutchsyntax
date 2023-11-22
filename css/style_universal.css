@@ -70,9 +70,23 @@ textarea, .textinputline {
     white-space: pre;
 }
 
+
+.last {
+	font-style: italic;
+	margin-bottom: 15px;
+}
+
+
+#last_static {
+	font-weight: bold;
+}
+
+
 /* Clear floats after the columns */
 .row:after {
 	content: "";
 	display: table;
 	clear: both;
 }
+
+

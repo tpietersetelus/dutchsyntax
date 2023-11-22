@@ -44,3 +44,14 @@ body {
 .hiddentable {
   border: none;
 }
+
+
+/* Stuff to make the "last updated" text not be weird because of the margins */
+
+.row {
+  margin-top: 5px;
+}
+
+#payloadtitle {
+  margin-bottom: 1px;
+}
