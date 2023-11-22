@@ -13,26 +13,21 @@
 			<div class="column" id="leftcol">
 				<h2>Search</h2>	
 		
-				<input type="text" oninput="update_everything();" class="textinput" id="prefix" name="prefix" rows="3" placeholder = "Add phrase"></textarea><br/>
-				<span id="optionlabel" class="optionlabel">Language</span><br/>
-				<form id="langform">
-  					<input type="radio" id="radio_nl" name="langform" value="nl">
-  					<label for="radio_nl"><span class="checkboxtext" id="addinfixtext">nl_NL</span></label><br>
-  					<input type="radio" id="radio_en" name="langform" value="en">
- 					<label for="radio_en"><span class="checkboxtext" id="addinfixtext">en_US</span></label><br>  
-  					<input type="radio" id="radio_all" name="langform" value="all">
-  					<label for="radio_all"><span class="checkboxtext" id="addinfixtext">all</span></label><br><br>
-				</form>
+				<input type="text" oninput="update_all();" class="textinputline" id="searchinput" name="searchinput" placeholder = "Add keyword(s)"></input><br/>
 				
-				<span id="optionlabel" class="optionlabel">Target</span><br/>
-				<form id="targetform">
-  					<input type="radio" id="radio_path" name="langform" value="path">
-  					<label for="radio_path"><span class="checkboxtext" id="addinfixtext">Path</span></label><br>
-  					<input type="radio" id="radio_text" name="langform" value="text">
- 					<label for="radio_text"><span class="checkboxtext" id="addinfixtext">Text</span></label><br>  
-  					<input type="radio" id="radio_both" name="langform" value="both">
-  					<label for="radio_both"><span class="checkboxtext" id="addinfixtext">Both</span></label><br><br>
-				</form>
+				<span id="langlabel" class="optionlabel">Language</span><br/>
+				<select oninput="update_all();" id="verbselect" name="verbselect">
+					<option value="nl">nl_NL</option>
+					<option value="en">en_US</option>
+					<option value="general">"all"</option>
+				</select><br/>		
+				<span id="targetlabel" class="optionlabel">Target</span><br/>
+				<select oninput="update_all();" id="verbselect" name="verbselect">
+					<option value="path">Path</option>
+					<option value="textcontent">Text</option>
+					<option value="both">Both</option>
+				</select><br/><br/>
+
 
 				<h2>Files</h2>	
 
@@ -52,7 +47,7 @@
 
 			</div>
 		</div>
-	<script type="text/javascript" src="/script.js"></script>				
+	<script type="text/javascript" src="script.js"></script>				
 	</body>
 
 

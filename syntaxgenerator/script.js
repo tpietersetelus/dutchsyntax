@@ -3,7 +3,7 @@ console.log("Script file loaded")
 
 
 // VARIABLES
-verbs_url = "https://tpietersetelus.github.io/dutchtools/data/verbs.txt";
+verbs_url = "https://tpietersetelus.github.io/dutchtools/data/syntaxgenerator/verbs.txt";
 
 
 // FUNCTIONS
