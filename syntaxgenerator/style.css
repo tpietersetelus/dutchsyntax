@@ -1,7 +1,7 @@
 /* Page-specific styling for Dutch Syntax Generator */
 
 body {
-    background-color: #c2c2c2;
+    background-color: #ababab;
 }
 
 
@@ -11,12 +11,12 @@ body {
 
 
 .textinput {
-	background-color: #d4d4d4;
+	background-color: #d6d6d6;
 }
 
 
 .textoutput {
-	background-color: #c2c2c2;
+	background-color: #ababab;
 }
 
 
@@ -29,3 +29,23 @@ body {
     color: orange;
 }
 
+.maintitle {
+    background-color: black;
+    color: white;
+  }
+  
+#subbar {
+    background-color: #424242;
+    color: white;
+    height: 14px; /* Necessary because no text */
+}
+  
+::placeholder {
+    color: #424242;
+    opacity: 1; /* Firefox */
+}
+  
+  
+::-ms-input-placeholder { /* Edge 12 -18 */
+    color: #424242;
+}

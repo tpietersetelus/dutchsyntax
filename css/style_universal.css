@@ -85,6 +85,52 @@ textarea, .textinputline {
 	font-style: italic;
 }
 
+
+
+
+
+
+.row {
+	margin-top: 5px;
+	padding: 0px 13px;
+  }
+
+  
+.maintitle {
+	width: 100%;
+	top: 0px;
+	padding: 10px 8px;
+	margin-bottom: 0px;
+
+
+}
+
+
+#subbar {
+	width: 100%;
+	top: 0px;
+	padding: 5px 8px;
+}
+  
+html, body {
+	width:100%;
+	height:100%;
+	margin:0;
+	padding:0;
+}
+   
+
+
+
+
+
+
+
+
+
+
+
+
 /* Clear floats after the columns */
 .row:after {
 	content: "";
