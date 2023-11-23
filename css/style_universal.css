@@ -110,6 +110,7 @@ textarea, .textinputline {
 	width: 100%;
 	top: 0px;
 	padding: 5px 8px;
+	height: 14px;
 }
   
 html, body {
@@ -119,17 +120,6 @@ html, body {
 	padding:0;
 }
    
-
-
-
-
-
-
-
-
-
-
-
 
 /* Clear floats after the columns */
 .row:after {

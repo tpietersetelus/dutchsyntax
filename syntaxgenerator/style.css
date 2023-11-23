@@ -37,7 +37,6 @@ body {
 #subbar {
     background-color: #424242;
     color: white;
-    height: 14px; /* Necessary because no text */
 }
   
 ::placeholder {
