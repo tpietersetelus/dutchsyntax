@@ -132,7 +132,6 @@ function file_list_search_filter(input_dict, input_searchterm){
     for (const elem of Object.keys(input_dict)){
         specific_text = input_dict[elem]["content"];
         specific_text = specific_text.toLowerCase()
-        console.log(specific_text);
         if (specific_text.includes(input_searchterm)){
             filtered_dict_content[elem] = input_dict[elem];
         }
@@ -166,7 +165,7 @@ function set_content_by_id(input_id, input_content){
 
 
 // Function to set the path and text to whatever id is passed
-function set_output_from_click(input_id, input_data_dict){
+function set_output_from_click(input_id, input_data_dict){    
     link_element = document.getElementById(input_id);
     path_text = link_element.text;
 
@@ -202,13 +201,18 @@ function copy_contents_payload(input_id){
 	textArea.remove();
 }
 
+function mark_clicked_link(input_id){
+    if (input_id != "UNSELECTED"){
+        var clicked_link_element = document.getElementById(input_id);
+        clicked_link_element.classList.add("my-class");
+    }
+}
 // UPDATE FUNCTION
 function update_all(){
     // Get values of search/options
     language_dropdown_value = read_dropdown_value("langselect");
     target_dropdown_value = read_dropdown_value("targetselect");
     search_bar_value = read_textarea_contents("searchinput");
-    console.log(search_bar_value);
 
     // Filtering
     payloads_filtered_by_language = file_list_language_filter(processed_payload_data, language_dropdown_value);
@@ -222,14 +226,11 @@ function update_all(){
     
     }
 
-    // TEMPORARY, IMPROVE THIS:
     selected_file_list = Object.keys(payloads_filtered_by_search);
 
     // Add selected file names to search result list
     set_results_list(selected_file_list, "searchresults");
-    // Run update for the first time
-    
-    
+
 }
 
 
@@ -247,7 +248,7 @@ async function main(){
     
     
     
-    
+    // Run update for the first time
     update_all();
 }
 

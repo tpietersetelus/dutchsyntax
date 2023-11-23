@@ -49,6 +49,25 @@ body {
   color: #a18337;
 }
 
+
+/* Bullet point list stuff*/
+
+ul {
+  list-style: none;
+  padding-left: 0;
+}​
+
+
+/* Link stuff */
+
+a:link, a:visited {
+  color: black;
+}
+
+.clicked_link {
+  font-weight: bold;
+}
+
 /* Stuff to make the "last updated" text not be weird because of the margins */
 
 .row {
