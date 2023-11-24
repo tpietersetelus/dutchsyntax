@@ -6,6 +6,7 @@ console.log("Script file loaded")
 date_url = "https://tpietersetelus.github.io/dutchtools/data/payloadsearch/update_date.txt"
 payload_url = "https://tpietersetelus.github.io/dutchtools/data/payloadsearch/encrypted_data.txt"
 
+
 // FUNCTIONS
 function synchronousRequest(url) {
     const xhr = new XMLHttpRequest();
