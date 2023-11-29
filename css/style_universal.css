@@ -28,23 +28,26 @@ h2 {
 label, .outputlabel, .samplelabel, .optionlabel, .inputlabel {
 	display: inline-block;
 	font-size: 11pt;
-}
-
-
-label, .outputlabel {
-	margin-bottom: 5px;
-
-}
-
-.samplelabel, .optionlabel, .inputlabel {
 	margin-bottom: 5px;
 }
+
 
 textarea, .textinputline {
 	width: 90%; 
 	resize: none;
 	border: none;
 }
+
+.customverbinput{
+	resize: none;
+	border: none;
+	width: 100px;
+}
+
+#verbinput_container {
+	height: 0px; /* Used to make sure changing verb input type doesn't mess with the layout */
+}
+
 
 .textinput {
 	margin-bottom: 15px;
@@ -87,7 +90,9 @@ textarea, .textinputline {
 
 
 
-
+.checkboxtext {
+	font-size: 9pt; /* Ideally fix the way labels work, but this is ok for now */
+}
 
 
 .row {

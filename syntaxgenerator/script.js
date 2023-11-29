@@ -126,7 +126,12 @@ function read_checkmark_status(input_id){
     return checked_status;
 }
 
-function edit_phrase(input_text, input_checkmark){
+function read_radio_status(input_name){
+    radio_value = document.querySelector(String.raw`input[name="${input_name}"]:checked`).value;
+    return radio_value;
+}
+
+function edit_phrase(input_text, input_checkmark = true){
     if (input_checkmark == true){
         check_text = input_text.replaceAll(" ", ""); // Get rid of any spaces for the check
         if (check_text.length != 0){ // If text not empty
@@ -170,6 +175,19 @@ function hide_unhide_optional_sample(input_checkmark, input_class){
         for (const element of document.querySelectorAll("."+input_class)) {
             element.style.display = "list-item";
         }
+    }
+}
+
+function hide_unhide_verbtype(input_selected){
+    if (input_selected == "existing") {
+        document.getElementById("verbselect").style.display = "";
+        document.getElementById("custom_inputs").style.display = "none";
+
+    } 
+    
+    if (input_selected == "custom") {
+        document.getElementById("verbselect").style.display = "none";
+        document.getElementById("custom_inputs").style.display = "";
     }
 }
 
@@ -333,6 +351,114 @@ function generate_utterances_output(input_prefix, input_main, input_suffix, inpu
     return combined_utterances;
 }
 
+
+function generate_utterances_output_custom(input_prefix, input_main, input_suffix, input_verbname = "", input_splitdict = [], input_infix_check, input_verb_stem, input_verb_stem_t, input_verb_inf){
+    // input_verbname and input_splitdict are currently dummies that may or may not be used in a later version
+    
+    utterances = [];
+
+
+    // Generate stem full
+    stem_full = String.raw`- ${input_prefix} ${input_verb_stem} ${input_main} ${input_suffix}`;
+    utterances.push(stem_full);
+
+
+    /* SPLIT DISABLED:
+    // Generate stem split + infix
+    if (input_verbname in input_splitdict){
+        for (const elem of input_splitdict[input_verbname]){
+            split_part = elem[0]
+            split_stem = elem[2]
+            
+            
+            stem_split = String.raw`- ${input_prefix} ${split_stem} ${input_main} ${split_part} ${input_suffix}`;
+            utterances.push(stem_split);
+
+            if (input_infix_check == true){
+                stem_split_infix = String.raw`- ${input_prefix} ${split_stem} ${input_main} ${input_suffix} ${split_part}`;
+                utterances.push(stem_split_infix);
+            }
+        }
+    } */
+
+
+    // Generate inf + infix
+
+    inf = String.raw`- ${input_prefix} ($inf_prefix|) ${input_main} ${input_verb_inf} ${input_suffix}`
+    utterances.push(inf);
+
+    if (input_infix_check == true){
+        inf_infix = String.raw`- ${input_prefix} ($inf_prefix|) ${input_main} ${input_suffix} ${input_verb_inf}`
+        utterances.push(inf_infix);
+    }
+
+
+    // Generate kunnen full + infix
+
+    kunnen_full = String.raw`- ${input_prefix} zou (je|jij) ${input_main} (kunnen|willen) ${input_verb_inf} ${input_suffix}`;
+    utterances.push(kunnen_full)
+
+    if (input_infix_check == true){
+        kunnen_full_infix = String.raw`- ${input_prefix} zou (je|jij) ${input_main} ${input_suffix} (kunnen|willen) ${input_verb_inf}`;
+        utterances.push(kunnen_full_infix);
+    }
+
+
+    // Generate kunnen split + infix
+
+    /* DISABLED
+    if (input_verbname in input_splitdict){
+        for (const elem of input_splitdict[input_verbname]){
+            split_part = elem[0]
+            split_inf = elem[1]
+            
+            
+            kunnen_split = String.raw`- ${input_prefix} zou (je|jij) ${input_main} ${split_part} (kunnen|willen) ${split_inf} ${input_suffix}`;
+            utterances.push(kunnen_split);
+
+            if (input_infix_check == true){
+                stem_split_infix = String.raw`- ${input_prefix} zou (je|jij) ${input_main} ${input_suffix} ${split_part} (kunnen|willen) ${split_inf}`;
+                utterances.push(stem_split_infix);
+            }
+        }
+    }*/
+
+
+    // Generate stem+t + infix
+
+    stem_t = String.raw`- ${input_prefix} $stem_t_prefix ${input_main} ${input_verb_stem_t} ${input_suffix}`;
+    utterances.push(stem_t);
+
+    if (input_infix_check == true){
+        stem_t_infix = String.raw`- ${input_prefix} $stem_t_prefix ${input_main} ${input_suffix} ${input_verb_stem_t}`;
+        utterances.push(stem_t_infix);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // Remove duplicate spaces
+    edited_utterances = [];
+    for (const elem of utterances){
+        trimmed = elem.replace(/ +(?= )/g,'');
+        edited_utterances.push(trimmed);
+    }
+
+    // Generate inf + infix
+    combined_utterances = edited_utterances.join("\n");
+    return combined_utterances;
+}
+
+
 // BUTTON FUNCTIONS
 //// ADD
 function copy_contents_single(input_id){
@@ -389,13 +515,23 @@ function update_all(){
     infix_option_checkmark_status = read_checkmark_status("addinfixcheck");
     hide_unhide_optional_sample(infix_option_checkmark_status, "infixsample");
     
+    // Get and hide/unhide verb stuff
+    verbtype_option_radio_status = read_radio_status("verbtype");
+    hide_unhide_verbtype(verbtype_option_radio_status);
+
+
     // Generate and set prefix slots
     prefixes_slot_output = generate_prefixes_output();
     set_output_text("slotprefix", prefixes_slot_output);
 
     // Generate and set verb slots
-    verbs_slot_output = generate_verbslots_output(selected_verb);
-    set_output_text("slotverb", verbs_slot_output);
+    if (verbtype_option_radio_status == "existing"){
+        verbs_slot_output = generate_verbslots_output(selected_verb);
+        set_output_text("slotverb", verbs_slot_output);
+    }if (verbtype_option_radio_status == "custom"){
+        set_output_text("slotverb", "<span class='output_placeholder'>N/A</span>");
+    }
+
 
 
 
@@ -408,14 +544,34 @@ function update_all(){
 
 
     // Generate and set utterances
-    utterances_output = generate_utterances_output(prefix_edited_phrase, main_edited_phrase, suffix_edited_phrase, selected_verb, split_verbs_dict, infix_option_checkmark_status);
-    set_output_text("utterances", utterances_output);
 
-    // Generate utterances
+
+
+
+
+
+
+    if (verbtype_option_radio_status == "existing"){
+        utterances_output = generate_utterances_output(prefix_edited_phrase, main_edited_phrase, suffix_edited_phrase, selected_verb, split_verbs_dict, infix_option_checkmark_status);
+    }if (verbtype_option_radio_status == "custom"){
+        // Retrieve custom verb names
+        custom_stem = read_textarea_contents("customverbinput_stem");
+        custom_stem_t = read_textarea_contents("customverbinput_stem_t");
+        custom_inf = read_textarea_contents("customverbinput_inf");
+
+        // Get edited forms
+        edited_stem = edit_phrase(custom_stem);
+        edited_stem_t = edit_phrase(custom_stem_t);
+        edited_inf = edit_phrase(custom_inf);
+
+
+        utterances_output = generate_utterances_output_custom(prefix_edited_phrase, main_edited_phrase, suffix_edited_phrase, "", [], infix_option_checkmark_status, edited_stem, edited_stem_t, edited_inf);
+    }
+
+    set_output_text("utterances", utterances_output);
 
 
 }
-
 
 
 // MAIN FUNCTION CALL

@@ -29,8 +29,18 @@
 				<textarea oninput="update_all();" class="textinput" id="suffix" name="suffix" rows="3" placeholder = "Add phrase"></textarea><br/>
 
 				<label for="verbselect">Main verb</label><br/>
-				<select oninput="update_all();" id="verbselect" name="verbselect"></select><br/>
+				<label class="checkboxtext"><input oninput="update_all();" type="radio" id="verbtype_existing" name="verbtype" value="existing" checked/>Existing verb</label>
+				<label class="checkboxtext"><input oninput="update_all();" type="radio" id="verbtype_custom" name="verbtype" value="custom" />Custom verb</label><br/>
 				
+				<div id="verbinput_container">
+					<select oninput="update_all();" id="verbselect" name="verbselect"></select>
+					<span id="custom_inputs">
+						<input type="text" oninput="update_all();" class="customverbinput" id="customverbinput_stem" name="customverbinput" placeholder = "Add stem"></input>
+						<input type="text" oninput="update_all();" class="customverbinput" id="customverbinput_stem_t" name="customverbinput" placeholder = "Add stem + t"></input>
+						<input type="text" oninput="update_all();" class="customverbinput" id="customverbinput_inf" name="customverbinput" placeholder = "Add infinitive"></input>
+					</span>
+				</div>
+				<br/>
 				<span id="optionlabel" class="optionlabel">Options</span><br/>
 				<input oninput="update_all();" type="checkbox" id="addinfixcheck" name="addinfixcheck" value="addinfixcheck">
                 <span class="checkboxtext" id="addinfixtext">Add utterances with infixed ending</span>

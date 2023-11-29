@@ -10,7 +10,7 @@ body {
 }
 
 
-.textinput {
+.textinput, .customverbinput {
 	background-color: #d6d6d6;
 }
 
@@ -46,5 +46,9 @@ body {
   
   
 ::-ms-input-placeholder { /* Edge 12 -18 */
+    color: #424242;
+}
+
+.output_placeholder {
     color: #424242;
 }
