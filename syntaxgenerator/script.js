@@ -226,7 +226,7 @@ function generate_samples_output(input_prefix, input_main, input_suffix){
     kunnen_split_infix = String.raw`${input_prefix} <b>zou je</b> ${input_main} ${input_suffix} <b>op kunnen slaan</b>`;    
     samples_dict["kunnen_split_infix"] = kunnen_split_infix;
 
-    stem_t_infix = String.raw`${input_prefix} <b>ik wil dat je</b> ${input_main} <b>bewaart</b> ${input_suffix}`;
+    stem_t_infix = String.raw`${input_prefix} <b>ik wil dat je</b> ${input_main} ${input_suffix} <b>bewaart</b>`;
     samples_dict["stem_t_infix"] = stem_t_infix;
 
     return samples_dict;
