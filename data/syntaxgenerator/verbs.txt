@@ -84,7 +84,6 @@
 !op/ruimen/ruim
 =open
 !aan/zetten/zet
-!zien/laten/laat
 !(naar voren|tevoorschijn)/halen/haal
 !open/doen/doe
 !op/starten/start
@@ -126,7 +125,6 @@
 !in/stellen/stel
 =share
 =show
-!zien/laten/laat
 !weer/geven/geef
 =shuffle
 #
@@ -144,12 +142,10 @@
 !uit/doen/doe
 !uit/zetten/zet
 =summarize
-!zien/laten/laat
 !op/zoeken/zoek
 !weer/geven/geef
 =summarize_voicemail
 ?
-!zien/laten/laat
 !op/zoeken/zoek
 !weer/geven/geef
 =switch
